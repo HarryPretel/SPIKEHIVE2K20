@@ -1,6 +1,6 @@
 # SPIKEHIVE2K20
 
-## Team dumbass
+## Team Overlord:
 - Roshan Pai
 
 ## Team Members:
