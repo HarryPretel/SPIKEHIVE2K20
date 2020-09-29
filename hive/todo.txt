@@ -1,0 +1,3 @@
+update User model for django user authentication
+create functions for creating, modifying and deleting data
+turn into rest api
