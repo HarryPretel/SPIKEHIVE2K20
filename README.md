@@ -1,6 +1,6 @@
 # SPIKEHIVE2K20
 
-## Team Leader
+## Team dumbass
 - Roshan Pai
 
 ## Underlings:
