@@ -3,7 +3,7 @@
 ## Team dumbass
 - Roshan Pai
 
-## Underlings:
+## Team Members:
 - Aanjanaye Kajaria
 - Vivian Dai
 - Ege G Kula
