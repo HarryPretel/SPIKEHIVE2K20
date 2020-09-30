@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
+from .models import Hive, User
 
-from .models import User, Hive, Inspection, Equipment
-
+admin.site.register(Hive)
 admin.site.register(User)
