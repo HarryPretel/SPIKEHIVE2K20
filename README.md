@@ -16,3 +16,7 @@ $ pip3 install django
 
 $ pip3 install djangorestframework
 ```
+
+## Backend notes:
+admin user: harrisonp
+password: admin

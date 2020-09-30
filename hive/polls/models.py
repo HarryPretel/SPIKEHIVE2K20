@@ -44,7 +44,7 @@ class Inspection(models.Model):
 
 
 class Equipment(models.Model):
-    inspection = models.ForeignKey(Inspection)
+    inspection = models.ForeignKey(Inspection, on_delete=models.CASCADE)
     tool_name = models.CharField(max_length=100)
     amount_in_inventory = models.IntegerField(default=1)
     condition = models.CharField(max_length=1000)
