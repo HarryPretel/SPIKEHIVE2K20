@@ -1,6 +1,7 @@
 
 # Create your models here.
 from django.db import models
+from PIL import Image
 
 
 class User(models.Model):
@@ -8,6 +9,11 @@ class User(models.Model):
     password = models.CharField(max_length=1000)
     apiary_addr = models.CharField(max_length=1000)
     contact_info = models.CharField(max_length=1000)
+    profile_pic = models.ImageField(upload_to = None, height_field = None, width_field = None, max_length = 100, default = 'default.jpg')
+
+
+    #requires pillow library
+    #profile_pic = models.ImageField(upload_to = None, height_field = None, max_length = 100)
 
     def __str__(self):
         return self.username
