@@ -9,10 +9,10 @@
 - Harry Pretel
 
 ```
-python3 --version
+$ python3 --version
 3.6.1
 
-pip3 install django
+$ pip3 install django
 
-pip3 install djangorestframework
+$ pip3 install djangorestframework
 ```
