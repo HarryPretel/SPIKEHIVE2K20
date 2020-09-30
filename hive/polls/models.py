@@ -35,6 +35,8 @@ class Inspection(models.Model):
     health = models.IntegerField(default=100)
     honey = models.IntegerField(default=100)
     queen_production = models.IntegerField(default=100)
+    gain = models.IntegerField(default=0)
+    loss = models.IntegerField(default=0)
 
     def __str__(self):
         return self.date
