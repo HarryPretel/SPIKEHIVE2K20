@@ -32,14 +32,19 @@ class Hive(models.Model):
 class Inspection(models.Model):
     hive = models.ForeignKey(Hive, on_delete=models.CASCADE)
     date = models.DateTimeField('time of inspection')
-    health = models.IntegerField(default=100)
-    honey = models.IntegerField(default=100)
-    queen_production = models.IntegerField(default=100)
-    gain = models.IntegerField(default=0)
-    loss = models.IntegerField(default=0)
+    health = models.IntegerField('out of 10', default=10)
+    honey = models.IntegerField('scale from 1-10 (10 hi)', default=10)
+    queen_production = models.IntegerField('bees per month', default=100)
+    weight = models.FloatField('pounds', default=100)
+    net_weight_change = models.FloatField(
+        'change in weight (lbs)', default=0)
 
     def __str__(self):
         return self.date
 
-    def is_healthy(self):
-        return self.health > 75
+
+class Equipment(models.Model):
+    inspection = models.ForeignKey(Inspection)
+    tool_name = models.CharField(max_length=100)
+    amount_in_inventory = models.IntegerField(default=1)
+    condition = models.CharField(max_length=1000)
