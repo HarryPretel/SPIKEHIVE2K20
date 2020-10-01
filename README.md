@@ -18,6 +18,13 @@ $ pip3 install django
 $ pip3 install djangorestframework
 ```
 
+### Create and run migrations:
+```
+$ cd SPIKEHIVE2K20/hive
+$ python3 manage.py createmigrations
+$ python3 manage.py migrate
+```
+
 
 ### Run Server:
 - Navigate to SPIKEHIVE2K20/hive directory, then run
@@ -25,6 +32,13 @@ $ pip3 install djangorestframework
 $ python3 manage.py runserver
 ```
 
-## Backend notes:
+### Create superuser:
+```
+$ cd SPIKEHIVE2K20/hive
+$ python3 manage.py createsuperuser
+```
+You will be prompted to enter a username and password, fill them in and write them down.
+
+### Backend notes:
 admin user: harrisonp
 password: admin
