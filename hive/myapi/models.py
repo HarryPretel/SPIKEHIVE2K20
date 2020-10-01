@@ -1,29 +1,23 @@
-
-# Create your models here.
+from django.contrib.auth.models import User
 from django.db import models
-from PIL import Image
+from PIL import Image as image
 
 
-class User(models.Model):
-    username = models.CharField(max_length=1000, default='bug_catcher_kimbal')
-    password = models.CharField(max_length=1000)
+class UserProfile(models.Model):
+    # This line is required. Links UserProfile to a User model instance.
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    picture = models.ImageField(
+        upload_to='profile_images', blank=True, default='default.jpg')
     apiary_addr = models.CharField(max_length=1000)
     contact_info = models.CharField(max_length=1000)
-    profile_pic = models.ImageField(upload_to = None, height_field = None, width_field = None, max_length = 100, default = 'default.jpg')
-
-
-    #requires pillow library
-    #profile_pic = models.ImageField(upload_to = None, height_field = None, max_length = 100)
+    username = models.CharField(max_length=1000, default='default_username')
 
     def __str__(self):
         return self.username
 
-    #question_text = models.CharField(max_length=200)
-    #pub_date = models.DateTimeField('date published')
-
 
 class Hive(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     name = models.CharField(max_length=1000)
     addr = models.CharField(max_length=1000)
 
@@ -46,7 +40,7 @@ class Inspection(models.Model):
         'change in weight (lbs)', default=0)
 
     def __str__(self):
-        return self.date
+        return str(self.date)
 
 
 class Equipment(models.Model):
