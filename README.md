@@ -15,6 +15,11 @@ $ python3 --version
 $ pip3 install django
 
 $ pip3 install djangorestframework
+
+Run Server:
+- Navigate to SPIKEHIVE2K20/hive directory, then run
+
+$ python3 manage.py runserver
 ```
 
 ## Backend notes:
