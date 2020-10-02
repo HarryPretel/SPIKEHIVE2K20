@@ -14,11 +14,11 @@ class ProfileForm extends React.Component {
                     temp = i
                 }
             }
-            console.log('state 1' + JSON.stringify(this.state))
             this.setState({ userprofile: temp })
-        });
+            console.log('state 1' + JSON.stringify(this.state))
+        }).then( x => {
         fetch('http://localhost:8000/api/hives/').then(res => res.json()).then(json => {
-            console.log('state 1.5' + JSON.stringify(this.state))
+            console.log('state 1.5' + JSON.stringify(json))
             var temp = []
             for (let i of json) {
                 console.log('hives up pk' + JSON.stringify(i.user.split('/')[5]))
@@ -30,7 +30,7 @@ class ProfileForm extends React.Component {
             console.log(temp)
             this.setState({ ...this.state, hives: temp })
             console.log(this.state)
-        })
+        })})
     }
     handle_change = e => {
         const name = e.target.name;
