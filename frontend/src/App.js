@@ -63,12 +63,14 @@ class App extends Component {
       .then(json => {
         localStorage.setItem('token', json.token);
         console.log('json in login: ' + JSON.stringify(json))
-        localStorage.setItem('username', json.user.username)
-        localStorage.setItem('userpk', json.user.pk)
+        if (json.user) {
+          localStorage.setItem('username', json.user.username)
+          localStorage.setItem('userpk', json.user.pk)
+        }
         this.setState({
           logged_in: true,
           displayed_form: '',
-          username: json.user.username
+          username: json.user ? json.user.username : ''
         });
       });
   };
