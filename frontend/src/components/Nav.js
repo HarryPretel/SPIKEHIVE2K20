@@ -17,6 +17,7 @@ function Nav(props) {
       <li onClick={() => props.display_form('inspection')}>inspection</li>
       <li onClick={() => props.display_form('equipment')}>equipment</li>
     </ul>
+
   );
 
   return <div>{props.logged_in ? logged_in_nav : logged_out_nav}</div>;
