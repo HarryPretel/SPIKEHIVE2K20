@@ -20,6 +20,8 @@ $ pip3 install djangorestframework
 $ pip3 install Pillow
 
 $ pip3 install django-cors-headers
+
+$ pip3 install djangorestframework-jwt
 ```
 
 ### Create and run migrations:
