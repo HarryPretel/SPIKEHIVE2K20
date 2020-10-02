@@ -69,6 +69,7 @@ class App extends Component {
           localStorage.setItem('username', json.user.username)
           localStorage.setItem('userpk', json.user.pk)
         }
+        else throw Error("no user exists")
         this.setState({
           logged_in: true,
           displayed_form: '',
@@ -103,7 +104,7 @@ class App extends Component {
       .catch(error => {
         console.log("ERROR: " + error)
         alert("missing information");
-      });   
+      });
   };
 
   handle_logout = () => {
