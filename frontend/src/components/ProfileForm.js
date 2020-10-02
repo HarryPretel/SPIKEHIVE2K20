@@ -29,8 +29,21 @@ class ProfileForm extends React.Component {
 
     render() {
         return (
-            <h4>Profile {this.state.userprofile.user.username}, pk: {this.state.userprofile.user.pk}, apiary address: {this.state.userprofile.apiary_addr}, picture: {this.state.userprofile.picture},
-            contact info: {this.state.userprofile.contact_info}</h4>
+             <h1>Your Profile</h1>
+            <h2>Contact Information</h2>
+            <p>User Name: {this.state.userprofile.user.username}</p>
+            <br>
+            <p>Apiary Address: {this.state.userprofile.apiary_addr}</p>
+            <br>
+            <p>Contact info: {this.state.userprofile.contact_info}</p>
+            <br>
+            <br>
+            <form>
+            				<button class="rounded" type="submit" formaction='javascript:editContactInfo();'>Edit Contact Information</button>
+            			</form>
+            <br>
+            <h2>Profile Picture</h2>
+            <div>{this.state.userprofile.picture}</div>
         );
     }
 }
