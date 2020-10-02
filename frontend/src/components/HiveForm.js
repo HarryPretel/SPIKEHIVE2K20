@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 
 class HiveForm extends React.Component {
     state = {
-        username: '',
-        password: ''
     };
 
     handle_change = e => {
