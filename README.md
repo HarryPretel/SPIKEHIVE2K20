@@ -16,6 +16,10 @@ $ python3 --version
 $ pip3 install django
 
 $ pip3 install djangorestframework
+
+$ pip3 install Pillow
+
+$ pip3 install django-cors-headers
 ```
 
 ### Create and run migrations:
@@ -42,3 +46,11 @@ You will be prompted to enter a username and password, fill them in and write th
 ### Backend notes:
 admin user: harrisonp
 password: admin
+
+### Run the react server:
+- Navigate to SPIKEHIVE2K20/frontend directory, then run 
+```	
+$ npm ci
+$ npm start 
+```
+
