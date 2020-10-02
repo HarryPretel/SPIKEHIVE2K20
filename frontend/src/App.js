@@ -92,6 +92,8 @@ class App extends Component {
     })
       .then(res => res.json())
       .then(json => {
+        if (json.username[0] === "A user with that username already exists.") throw Error("a user with that username already exists");
+        console.log('here it is' + JSON.stringify(json))
         localStorage.setItem('token', json.token);
         this.setState({
           logged_in: true,
@@ -101,7 +103,7 @@ class App extends Component {
       })
       .catch(error => {
         console.log("ERROR: " + error)
-        alert("missing information");
+        alert(error);
       });
   };
 
