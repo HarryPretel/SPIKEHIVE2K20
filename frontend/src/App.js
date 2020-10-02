@@ -49,6 +49,8 @@ class App extends Component {
     }
   }
 
+
+
   handle_login = (e, data) => {
     console.log('handle_login')
     e.preventDefault();
@@ -70,6 +72,10 @@ class App extends Component {
           displayed_form: '',
           username: json.user.username
         });
+      })
+      .catch(error => {
+        console.log("ERROR: " + error)
+        alert("Wrong username or password");
       });
   };
 
@@ -91,7 +97,11 @@ class App extends Component {
           displayed_form: '',
           username: json.username
         });
-      });
+      })
+      .catch(error => {
+        console.log("ERROR: " + error)
+        alert("missing information");
+      });   
   };
 
   handle_logout = () => {
