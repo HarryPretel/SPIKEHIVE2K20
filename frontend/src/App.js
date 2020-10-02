@@ -53,58 +53,59 @@ class App extends Component {
 
   handle_login = (e, data) => {
     console.log('handle_login')
-    e.preventDefault();
-    fetch('http://localhost:8000/token-auth/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-    })
-      .then(res => res.json())
-      .then(json => {
-        localStorage.setItem('token', json.token);
-        console.log('json in login: ' + JSON.stringify(json))
-        if (json.user) {
-          localStorage.setItem('username', json.user.username)
-          localStorage.setItem('userpk', json.user.pk)
-        }
-        else throw Error("no user exists")
-        this.setState({
-          logged_in: true,
-          displayed_form: '',
-          username: json.user ? json.user.username : ''
-        });
-      })
-      .catch(error => {
-        console.log("ERROR: " + error)
-        alert("Wrong username or password");
+    try {
+      e.preventDefault();
+      var json = fetch('http://localhost:8000/token-auth/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      }).json()
+      json = Promise.resolve(json)
+      localStorage.setItem('token', json.token);
+      console.log('json in login: ' + JSON.stringify(json))
+      if (json.user) {
+        localStorage.setItem('username', json.user.username)
+        localStorage.setItem('userpk', json.user.pk)
+      }
+      else throw Error("no user exists")
+      this.setState({
+        logged_in: true,
+        displayed_form: '',
+        username: json.user ? json.user.username : ''
       });
-  };
+    } catch (error) {
+      console.log("ERROR: " + error)
+      alert("Wrong username or password");
+    }
+  }
 
   handle_signup = (e, data) => {
-    console.log('handle_signup')
-    e.preventDefault();
-    fetch('http://localhost:8000/api/users/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-    })
-      .then(res => res.json())
-      .then(json => {
-        localStorage.setItem('token', json.token);
-        this.setState({
-          logged_in: true,
-          displayed_form: '',
-          username: json.username
-        });
-      })
-      .catch(error => {
-        console.log("ERROR: " + error)
-        alert("missing information");
+    console.log('handle_signup ' + JSON.stringify(data))
+    try {
+      if (data.username === '') throw Error("no username")
+      if (data.password === '') throw Error("no password")
+      if (data.password.length < 8) throw Error("password must be 8 characters")
+      e.preventDefault();
+      var json = fetch('http://localhost:8000/api/users/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      }).json()
+      json = Promise.resolve(json)
+      localStorage.setItem('token', json.token);
+      this.setState({
+        logged_in: true,
+        displayed_form: '',
+        username: json.username
       });
+    } catch (error) {
+      console.log("ERROR: " + error)
+      alert("missing information" + error);
+    };
   };
 
   handle_logout = () => {
@@ -116,12 +117,12 @@ class App extends Component {
   handle_profile = () => { // TODO
     this.setState({ random: 'random' })
     console.log('handle_profile: ' + JSON.stringify(this.state))
-  }
+  };
 
   handle_profile = () => { // TODO
     this.setState({ random: 'random' })
     console.log('handle_profile: ' + JSON.stringify(this.state))
-  }
+  };
 
   display_form = form => {
     console.log('display form')
