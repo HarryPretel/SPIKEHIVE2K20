@@ -20,15 +20,13 @@ class App extends Component {
   componentDidMount() {
     console.log('componentDidMount')
     if (this.state.logged_in) {
-      fetch('http://localhost:8000/api/current_user/', {
+      var json = fetch('http://localhost:8000/api/current_user/', {
         headers: {
           Authorization: `JWT ${localStorage.getItem('token')}`
         }
-      })
-        .then(res => res.json())
-        .then(json => {
-          this.setState({ username: json.username });
-        });
+      }).json()
+      json = Promise.resolve(json)
+      this.setState({ username: json.username });
     }
 
     if (this.state.logged_in) {
