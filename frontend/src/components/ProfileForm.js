@@ -10,7 +10,7 @@ class ProfileForm extends React.Component {
 
     componentDidMount() {
         console.log('componentDidMount - chekc ')
-        fetch(`http://localhost:8000/api/userprofiles/${localStorage.getItem('')}`)
+        fetch('http://localhost:8000/api/userprofiles/')
             .then(res => res.json())
             .then(json => {
                 console.log('hi')
