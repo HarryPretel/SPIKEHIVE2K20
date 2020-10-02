@@ -10,7 +10,8 @@ class App extends Component {
     this.state = {
       displayed_form: '',
       logged_in: localStorage.getItem('token') ? true : false,
-      username: ''
+      username: '',
+      pk: ''
     };
   }
 
@@ -26,6 +27,23 @@ class App extends Component {
           this.setState({ username: json.username });
         });
     }
+    
+    if (this.state.logged_in) {
+      fetch('http://localhost:8000/api/userprofiles/', {
+        headers: {
+          Authorization: `JWT ${localStorage.getItem('token')}`
+        }
+      })
+        .then(res => res.json())
+        .then(json => {
+          for (var i = 0; i < json.length; i++) {
+            console.log(json[i])
+          	if (json[i].username == this.state.username) {
+          		this.setState({ pk: json[i].pk });
+          	}
+          }
+        });
+     }
   }
 
   handle_login = (e, data) => {
@@ -40,6 +58,7 @@ class App extends Component {
       .then(res => res.json())
       .then(json => {
         localStorage.setItem('token', json.token);
+        console.log(json)
         this.setState({
           logged_in: true,
           displayed_form: '',
@@ -102,7 +121,7 @@ class App extends Component {
         {form}
         <h3>
           {this.state.logged_in
-            ? `Hello, ${this.state.username}`
+            ? `Hello, ${this.state.username}, ${this.state.pk}`
             : 'Please Log In'}
         </h3>
       </div>
