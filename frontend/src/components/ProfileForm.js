@@ -3,20 +3,20 @@ import PropTypes from 'prop-types';
 import App from '../App'
 
 class ProfileForm extends React.Component {
-    state = {
-        username: '',
-        password: ''
-    };
+    state = { user: {} }
 
     componentDidMount() {
         console.log('componentDidMount - chekc ')
         fetch('http://localhost:8000/api/userprofiles/')
             .then(res => res.json())
             .then(json => {
-                console.log('hi')
-                console.log(json)
-                this.setState(json)
-                console.log('state:' + JSON.stringify(this.state))
+                var temp = 0
+                for (let i of json) {
+                    if (i.user.username == localStorage.getItem('username')) {
+                        temp = i
+                    }
+                }
+                this.setState(temp)
             });
     }
     handle_change = e => {
@@ -31,7 +31,8 @@ class ProfileForm extends React.Component {
 
     render() {
         return (
-            <h4>Profile {localStorage.getItem('username')} {localStorage.getItem('userpk')}</h4>
+            <h4>Profile {this.state.user.username}, pk: {this.state.user.pk}, apiary address: {this.state.apiary_addr}, picture: {this.state.picture},
+            contact info: {this.state.contact_info}</h4>
         );
     }
 }
