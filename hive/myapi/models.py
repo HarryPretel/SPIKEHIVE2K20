@@ -10,10 +10,9 @@ class UserProfile(models.Model):
         upload_to='profile_images', blank=True, default='default.jpg')
     apiary_addr = models.CharField(max_length=1000)
     contact_info = models.CharField(max_length=1000)
-    username = models.CharField(max_length=1000, default='default_username')
 
     def __str__(self):
-        return self.username
+        return self.user.username
 
 
 class Hive(models.Model):

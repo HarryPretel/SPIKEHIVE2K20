@@ -10,7 +10,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('username',)
+        fields = ('username', 'pk')
 
 
 class UserSerializerWithToken(serializers.ModelSerializer):
@@ -36,19 +36,22 @@ class UserSerializerWithToken(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('token', 'username', 'password')
+        fields = ('token', 'username', 'password', 'pk')
 
 
-#class UserSerializer(serializers.HyperlinkedModelSerializer):
+# class UserSerializer(serializers.HyperlinkedModelSerializer):
 #    class Meta:
 #        model = User
 #        fields = ('pk', 'first_name', 'last_name', 'email', 'password')
 
 
 class UserProfileSerializer(serializers.HyperlinkedModelSerializer):
+    user = UserSerializer(required=True)
+
     class Meta:
         model = UserProfile
-        fields = ('pk', 'apiary_addr', 'contact_info', 'picture', 'username')
+        fields = ('pk', 'apiary_addr', 'contact_info',
+                  'picture', 'user')
 
 
 class HiveSerializer(serializers.HyperlinkedModelSerializer):

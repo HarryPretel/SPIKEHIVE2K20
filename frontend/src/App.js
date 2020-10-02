@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Nav from './components/Nav';
 import LoginForm from './components/LoginForm';
 import SignupForm from './components/SignupForm';
+import ProfileForm from './components/ProfileForm';
+import HiveForm from './components/HiveForm';
 import './App.css';
 
 class App extends Component {
@@ -9,13 +11,14 @@ class App extends Component {
     super(props);
     this.state = {
       displayed_form: '',
-      logged_in: localStorage.getItem('token') ? true : false,
+      logged_in: false, // localStorage.getItem('token') ? true : false, got rid of bc token dont work
       username: '',
       pk: ''
     };
   }
 
   componentDidMount() {
+    console.log('componentDidMount')
     if (this.state.logged_in) {
       fetch('http://localhost:8000/api/current_user/', {
         headers: {
@@ -27,7 +30,7 @@ class App extends Component {
           this.setState({ username: json.username });
         });
     }
-    
+
     if (this.state.logged_in) {
       fetch('http://localhost:8000/api/userprofiles/', {
         headers: {
@@ -36,17 +39,18 @@ class App extends Component {
       })
         .then(res => res.json())
         .then(json => {
+          console.log('state when mounting: ' + JSON.stringify(this.state) + '\njson: ' + JSON.stringify(json))
           for (var i = 0; i < json.length; i++) {
-            console.log(json[i])
-          	if (json[i].username == this.state.username) {
-          		this.setState({ pk: json[i].pk });
-          	}
+            if (json[i].username === this.state.username) {
+              this.setState({ pk: json[i].pk });
+            }
           }
         });
-     }
+    }
   }
 
   handle_login = (e, data) => {
+    console.log('handle_login')
     e.preventDefault();
     fetch('http://localhost:8000/token-auth/', {
       method: 'POST',
@@ -58,7 +62,9 @@ class App extends Component {
       .then(res => res.json())
       .then(json => {
         localStorage.setItem('token', json.token);
-        console.log(json)
+        console.log('json in login: ' + JSON.stringify(json))
+        localStorage.setItem('username', json.user.username)
+        localStorage.setItem('userpk', json.user.pk)
         this.setState({
           logged_in: true,
           displayed_form: '',
@@ -68,6 +74,7 @@ class App extends Component {
   };
 
   handle_signup = (e, data) => {
+    console.log('handle_signup')
     e.preventDefault();
     fetch('http://localhost:8000/api/users/', {
       method: 'POST',
@@ -88,17 +95,32 @@ class App extends Component {
   };
 
   handle_logout = () => {
-    localStorage.removeItem('token');
+    console.log('handle_logout')
+    localStorage.clear()
     this.setState({ logged_in: false, username: '' });
   };
 
+  handle_profile = () => { // TODO
+    this.setState({ random: 'random' })
+    console.log('handle_profile: ' + JSON.stringify(this.state))
+  }
+
+  handle_profile = () => { // TODO
+    this.setState({ random: 'random' })
+    console.log('handle_profile: ' + JSON.stringify(this.state))
+  }
+
   display_form = form => {
+    console.log('display form')
     this.setState({
       displayed_form: form
     });
   };
 
   render() {
+    console.log(this.state)
+    console.log('render')
+    console.log(`${localStorage.getItem('username')}`)
     let form;
     switch (this.state.displayed_form) {
       case 'login':
@@ -106,6 +128,12 @@ class App extends Component {
         break;
       case 'signup':
         form = <SignupForm handle_signup={this.handle_signup} />;
+        break;
+      case 'profile':
+        form = <ProfileForm handle_profile={this.handle_profile} />;
+        break;
+      case 'hives':
+        form = <HiveForm handle_hive={this.handle_hive} />;
         break;
       default:
         form = null;
@@ -121,7 +149,7 @@ class App extends Component {
         {form}
         <h3>
           {this.state.logged_in
-            ? `Hello, ${this.state.username}, ${this.state.pk}`
+            ? `username: ${this.state.username}____pk: ${this.state.pk}`
             : 'Please Log In'}
         </h3>
       </div>
