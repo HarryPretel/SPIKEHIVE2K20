@@ -1,0 +1,2 @@
+horizontal navigation page
+profile form display data correctly - and display image

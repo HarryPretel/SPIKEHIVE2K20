@@ -49,6 +49,8 @@ class App extends Component {
     }
   }
 
+
+
   handle_login = (e, data) => {
     console.log('handle_login')
     e.preventDefault();
@@ -63,13 +65,19 @@ class App extends Component {
       .then(json => {
         localStorage.setItem('token', json.token);
         console.log('json in login: ' + JSON.stringify(json))
-        localStorage.setItem('username', json.user.username)
-        localStorage.setItem('userpk', json.user.pk)
+        if (json.user) {
+          localStorage.setItem('username', json.user.username)
+          localStorage.setItem('userpk', json.user.pk)
+        }
         this.setState({
           logged_in: true,
           displayed_form: '',
-          username: json.user.username
+          username: json.user ? json.user.username : ''
         });
+      })
+      .catch(error => {
+        console.log("ERROR: " + error)
+        alert("Wrong username or password");
       });
   };
 
@@ -91,7 +99,11 @@ class App extends Component {
           displayed_form: '',
           username: json.username
         });
-      });
+      })
+      .catch(error => {
+        console.log("ERROR: " + error)
+        alert("missing information");
+      });   
   };
 
   handle_logout = () => {
