@@ -113,9 +113,10 @@ class App extends Component {
     this.setState({ logged_in: false, username: '' });
   };
 
-  handle_profile = () => { // TODO
+  handle_profile = (e, pk) => { // TODO
+    localStorage.setItem('hive_pk', pk)
     this.setState({ displayed_form: 'hives' })
-    console.log('handle_profile: ' + JSON.stringify(this.state))
+    console.log('handle_profile: ' + pk)
     this.render();
   };
 
