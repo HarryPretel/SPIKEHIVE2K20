@@ -123,18 +123,19 @@ class App extends Component {
 
   handle_hive = (e, pk) => {
     localStorage.setItem('inspection_pk', pk)
-    console.log('inspection_pk: ', pk)
+    //console.log('inspection_pk: ', pk)
     this.setState({
       displayed_form: 'inspections'
     });
+    this.render();
   }
 
   handle_inspection = (e, pk) => {
     localStorage.setItem('inspection_pk', pk)
     console.log('inspection_pk: ', pk)
-    this.setState({
-      displayed_form: 'hives'
-    });
+    //this.setState({
+      //displayed_form: 'hives'
+    //});
   }
 
   display_form = form => {
@@ -163,7 +164,8 @@ class App extends Component {
         form = <HiveForm handle_hive={this.handle_hive} />;
         break;
       case 'inspections':
-        form = <InspectionForm handle_hive={this.handle_inspection} />;
+        form = <InspectionForm handle_inspection={this.handle_inspection} />;
+        break;
       default:
         form = null;
     }

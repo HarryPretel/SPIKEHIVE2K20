@@ -4,13 +4,16 @@ import { Table } from 'react-bootstrap'
 import { getAllData_good } from '../HelperFunctions'
 
 class InspectionForm extends React.Component{
-    state = {
+  constructor(props) {
+    super(props)
+    this.state = {
         userprofile: { user: {} },
         hives: [],
         equipment: [],
         current_ins: {},
         current_hive: {}
     };
+  }
 
     async componentDidMount(){
         let ins_pk = localStorage.getItem('inspection_pk')
@@ -25,7 +28,7 @@ class InspectionForm extends React.Component{
 
         for(let i of this.state.hives) {
             if((i.pk) == hive_pk){
-                temp3 = {}
+                temp3 = i
                 for(let j of i.inspections){
                     if((j.pk)== ins_pk){
                         temp1 = j.equipment
@@ -37,6 +40,7 @@ class InspectionForm extends React.Component{
             }
         }
         this.setState({equipment: temp1, current_ins: temp2, current_hive: temp3})
+        console.log("INSEPCTIONS!!!!!!!!; "  + this.state)
     }
 
     handle_change = e => {
@@ -70,7 +74,7 @@ class InspectionForm extends React.Component{
                 <h2>Hive name: {this.state.current_hive.name}</h2>
                 <h2>Inspection Date: {this.state.current_ins.date}</h2>
                 <div>
-                    <h1 id = 'title'>Equipments</h1>
+                    <h1 id = 'title'>Equipment</h1>
                     <Table striped bordered hover>
                         <thead>
                             <th>Tool Name</th>
@@ -88,7 +92,6 @@ class InspectionForm extends React.Component{
 }
 
 export default InspectionForm;
-
 
 InspectionForm.propTypes = {
     handle_inspection: PropTypes.func.isRequired

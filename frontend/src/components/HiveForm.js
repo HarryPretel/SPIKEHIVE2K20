@@ -69,7 +69,7 @@ class HiveForm extends React.Component {
                     <td>{queen_production}</td>
                     <td>{weight}</td>
                     <td>{net_weight_change}</td>
-                    <td><button onClick={e => this.props.handle_hive(e, pk)} type="button" class="btn btn-primary">Equipments</button></td>
+                    <td><button onClick={e => this.props.handle_hive(e, pk)} type="button" class="btn btn-primary">Equipment</button></td>
                 </tr>
             )
         })
@@ -91,6 +91,7 @@ class HiveForm extends React.Component {
                             <th>Queen Production</th>
                             <th>Weight</th>
                             <th>Weight Change</th>
+                            <th>Equipment</th>
                         </thead>
                         <tbody>
                             {this.renderTableData()}
