@@ -6,16 +6,22 @@ import { Table } from 'react-bootstrap'
 
 
 class ProfileForm extends React.Component {
-    state = { userprofile: { user: {} }, hives: [], inspections: [], equipment: [] }
+    state = { userprofile: { user: {} }, hives: [], inspections: [], equipment: [], show_button: false }
 
+
+    submitEdit() {
+        var text = document.getElementById("editField").value;
+        this.state.userprofile.contact_info = text;
+    }
     async componentDidMount() {
 
+        localStorage.setItem('showbutton', false)
         var alldata = await getAllData(localStorage.getItem('username'))
         console.log('alldata: ' + JSON.stringify(alldata))
         this.setState(alldata)
         console.log('final form: ' + JSON.stringify(this.state))
         console.log('userprofile' + JSON.stringify(this.state.userprofile) + '\nhive: ' + JSON.stringify(this.state.hives) + '\ninspections: ' + JSON.stringify(this.state.inspections) + '\nequipment: ' + JSON.stringify(this.state.equipment))
-        
+
     }
 
 
@@ -29,11 +35,11 @@ class ProfileForm extends React.Component {
         });
     };
 
-    renderTableData(){
+    renderTableData() {
         return this.state.hives.map((hive, index) => {
-            const{pk, user, name, addr} = hive
-            return(
-                <tr key = {pk}>
+            const { pk, user, name, addr } = hive
+            return (
+                <tr key={pk}>
                     <td>{name}</td>
                     <td>{addr}</td>
                 </tr>
@@ -42,7 +48,8 @@ class ProfileForm extends React.Component {
     }
 
     render() {
-        
+        console.log('render')
+
         return (
             <div>
                 <h1>Your Profile</h1>
@@ -51,19 +58,20 @@ class ProfileForm extends React.Component {
                 <p>Apiary Address: {this.state.userprofile.apiary_addr}</p>
                 <p>Contact info: {this.state.userprofile.contact_info}</p>
                 <form>
-                    <button class="rounded" type="submit" formaction='javascript:editContactInfo();'>Edit Contact Information</button>
+                    <button class="rounded" type="submit" onClick={() => this.setState({ show_button: true })}>Edit Contact Information</button>
                 </form>
-              <div id="editArea" style="visibility: hidden;">
-                <textarea id="editField" rows="8" cols="20"></textarea>
-             <form>
-             <button type="submit" formaction='javascript:submitEdit();'>Submit Edit</button>
-             </form>
-             </div>
-            
+                {this.state.show_button === true ?
+                    <div id="editArea">
+                        <textarea id="editField" rows="8" cols="20"></textarea>
+                        <form>
+                            <button type="submit" formaction='javascript:submitEdit();'>Submit Edit</button>
+                        </form>
+                    </div> : console.log('yooy')}
+
                 <h2>Profile Picture</h2>
                 <div>{this.state.userprofile.picture}</div>
                 <div>
-                    <h1 id = 'title'>Your Hives</h1>
+                    <h1 id='title'>Your Hives</h1>
                     <Table striped bordered hover>
                         <thead>
                             <th>Hive Name</th>
@@ -74,19 +82,11 @@ class ProfileForm extends React.Component {
                         </tbody>
                     </Table>
                 </div>
-            </div>
+            </div >
         );
     }
 }
 
-function editContactInfo() {
-	document.getElementById("editArea").style="visibility: visible;";
-}
-
-function submitEdit() {
-	var text = document.getElementById("editField").value;
-	{this.state.userprofile.contact_info} = text;
-}
 
 
 export default ProfileForm;

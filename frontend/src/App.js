@@ -132,7 +132,7 @@ class App extends Component {
 
   render() {
     console.log(this.state)
-    console.log('render')
+    console.log('render app')
     console.log(`${localStorage.getItem('username')}`)
     let form;
     switch (this.state.displayed_form) {
