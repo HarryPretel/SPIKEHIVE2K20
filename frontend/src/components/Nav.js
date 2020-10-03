@@ -11,11 +11,11 @@ function Nav(props) {
 
   const logged_in_nav = (
     <ul>
-      <li onClick={props.handle_logout}>logout</li>
       <li onClick={() => props.display_form('profile')}>profile</li>
       <li onClick={() => props.display_form('hives')}>hive</li>
       <li onClick={() => props.display_form('inspection')}>inspection</li>
       <li onClick={() => props.display_form('equipment')}>equipment</li>
+      <li onClick={props.handle_logout}>logout</li>
     </ul>
 
   );
