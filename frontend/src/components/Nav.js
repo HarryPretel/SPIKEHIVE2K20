@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styles from '../App.css';
 
 function Nav(props) {
   const logged_out_nav = (
     <ul>
-      <li onClick={() => props.display_form('login')}>login</li>
-      <li onClick={() => props.display_form('signup')}>signup</li>
+      <try onClick={() => props.display_form('login')}>login</try>
+      <try onClick={() => props.display_form('signup')}>signup</try>
     </ul>
   );
 
@@ -15,7 +16,7 @@ function Nav(props) {
       <li onClick={() => props.display_form('hives')}>hive</li>
       <li onClick={() => props.display_form('inspection')}>inspection</li>
       <li onClick={() => props.display_form('equipment')}>equipment</li>
-      <li onClick={props.handle_logout}>logout</li>
+
     </ul>
 
   );

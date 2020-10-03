@@ -42,6 +42,7 @@ class HiveForm extends React.Component {
 
 export default HiveForm;
 
+
 HiveForm.propTypes = {
     handle_hive: PropTypes.func.isRequired
 };
