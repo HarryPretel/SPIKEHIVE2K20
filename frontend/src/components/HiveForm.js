@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { getAllData } from '../HelperFunctions'
+import { Table } from 'react-bootstrap'
 
 class HiveForm extends React.Component {
     state = {
         userprofile: { user: {} },
         hives: [],
-        inspections: [],
-        equipment: []
+        current_hive: []
     };
 
     async componentDidMount() {
@@ -18,6 +18,20 @@ class HiveForm extends React.Component {
         console.log('final form: ' + JSON.stringify(this.state))
         console.log('userprofile' + JSON.stringify(this.state.userprofile) + '\nhive: ' + JSON.stringify(this.state.hives) + '\ninspections: ' + JSON.stringify(this.state.inspections) + '\nequipment: ' + JSON.stringify(this.state.equipment))
         console.log('hives' + JSON.stringify(this.state.hives[0]))
+       
+        var temp = []
+        var hive_pk = localStorage.getItem('hive_pk')
+        
+        
+        for(let i of this.state.hives) {
+            if((i.pk) == hive_pk){
+                temp = i
+                break
+            }
+        }
+        
+        this.setState({current_hive: temp})
+
     }
 
     handle_change = e => {
@@ -30,11 +44,58 @@ class HiveForm extends React.Component {
         });
     };
 
+    
+
+    renderTableData() {
+        function GoToInspection(element) {
+            localStorage.setItem('inspection_pk', element.pk)
+            console.log(element.pk)
+            //let form = <InspectionForm handle_inspection={this.handle_inspection} />
+
+        }
+
+    
+
+        return this.state.current_hive.inspections.map((inspection, index) => {
+            const { pk, hive, date, health,honey,queen_production,weight,net_weight_change } = hive
+            return (
+                <tr key={pk}>
+                    <td>{date}</td>
+                    <td>{health}</td> 
+                    <td>{honey}</td>
+                    <td>{queen_production}</td>
+                    <td>{weight}</td>
+                    <td>{net_weight_change}</td>
+                    <td><button onClick={() => GoToInspection(hive)} type="button" class="btn btn-primary">Equipments</button></td>
+                </tr>
+            )
+        })
+    }
+
     render() {
         return (
             <div>
-                <h4>{this.state.userprofile.user.username}'s Hive address: {this.state.hives.addr}</h4>
-                <h4>fdsadfsadfsasfda</h4>
+                <h1>Your Hive</h1>
+                <p>Hive name: {this.state.current_hive.name}</p>
+                <p>Hive Address: {this.state.current_hive.addr}</p>
+                <div>
+                    <h1 id = 'title'>Inspections of {this.state.current_hive.name}</h1>
+                    <Table striped bordered hover>
+                        <thead>
+                            <th>Inspection Date</th>
+                            <th>Health</th>
+                            <th>Honey Stores</th>
+                            <th>Queen Production</th>
+                            <th>Weight</th>
+                            <th>Weight Change</th>
+                        </thead>
+                        <tbody>
+                            {this.renderTableData()}
+
+                        </tbody>
+                    </Table>
+
+                </div>
             </div>
         );
     }
