@@ -8,7 +8,8 @@ class InspectionForm extends React.Component{
         userprofile: { user: {} },
         hives: [],
         equipment: [],
-        current_ins: {}
+        current_ins: {},
+        current_hive: {}
     };
 
     async componentDidMount(){
@@ -20,9 +21,11 @@ class InspectionForm extends React.Component{
 
         var temp1 = []
         var temp2 = {}
+        var temp3 = {}
 
         for(let i of this.state.hives) {
             if((i.pk) == hive_pk){
+                temp3 = {}
                 for(let j of i.inspections){
                     if((j.pk)== ins_pk){
                         temp1 = j.equipment
@@ -33,7 +36,7 @@ class InspectionForm extends React.Component{
                 break
             }
         }
-        this.setState({equipment: temp1, current_is: temp2})
+        this.setState({equipment: temp1, current_ins: temp2, current_hive: temp3})
     }
 
     handle_change = e => {
@@ -49,18 +52,38 @@ class InspectionForm extends React.Component{
     renderTableData() {
 
         return this.state.equipment.map((tool, index) => {
-            const { pk, hive, date, health,honey,queen_production,weight,net_weight_change, equipment } = tool
+            const { pk, inspection, tool_name, amount_in_inventory,condition} = tool
             return (
                 <tr key={pk}>
-                    <td>{date}</td>
-                    <td>{health}</td>
-                    <td>{honey}</td>
-                    <td>{queen_production}</td>
-                    <td>{weight}</td>
-                    <td>{net_weight_change}</td>
+                    <td>{tool_name}</td>
+                    <td>{amount_in_inventory}</td>
+                    <td>{condition}</td>
                 </tr>
             )
         })
+    }
+
+    render() {
+        return (
+            <div>
+                <h1>Your Equipment</h1>
+                <h2>Hive name: {this.state.current_hive.name}</h2>
+                <h2>Inspection Date: {this.state.current_ins.date}</h2>
+                <div>
+                    <h1 id = 'title'>Equipments</h1>
+                    <Table striped bordered hover>
+                        <thead>
+                            <th>Tool Name</th>
+                            <th>Amount in Inventory</th>
+                            <th>Condition</th>
+                        </thead>
+                        <tbody>
+                            {this.renderTableData()}
+                        </tbody>
+                    </Table>
+                </div>
+            </div>
+        );
     }
 }
 
