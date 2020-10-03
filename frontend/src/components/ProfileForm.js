@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import App from '../App'
 import { getAllData } from '../HelperFunctions'
 import { Table } from 'react-bootstrap'
+import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table'
 
 
 class ProfileForm extends React.Component {
@@ -35,14 +36,16 @@ class ProfileForm extends React.Component {
             return(
                 <tr key = {pk}>
                     <td>{name}</td>
-                    <td>{addr}</td>
+                    <td>{addr}</td> <td><button type="button" class="btn btn-primary">Details</button></td>
                 </tr>
             )
         })
     }
 
+    
+
     render() {
-        
+
         return (
             <div>
                 <h1>Your Profile</h1>
@@ -61,11 +64,14 @@ class ProfileForm extends React.Component {
                         <thead>
                             <th>Hive Name</th>
                             <th>Hive Address</th>
+                            <th>Details</th>
                         </thead>
                         <tbody>
                             {this.renderTableData()}
+                           
                         </tbody>
                     </Table>
+
                 </div>
             </div>
         );
