@@ -44,13 +44,18 @@ class SignupForm extends React.Component {
     */
 
     return (
+      <div style = {{
+        position: 'absolute', left: '50%', top: '50%',
+        transform: 'translate(-40%, -60%)'
+        }}>
+
         <MDBContainer>
           <MDBRow>
             <MDBCol md="6">
               <form onSubmit={e => this.props.handle_signup(e, this.state)}>
-                <p className="h4 text-center mb-4">Sign up</p>
+                {/* <p className="h4 text-center mb-4">Sign up</p> */}
                 <label htmlFor="defaultFormRegisterNameEx" className="grey-text">
-                  Your name
+                  Username
                 </label>
                 <input
                     type="text"
@@ -60,7 +65,7 @@ class SignupForm extends React.Component {
                 />
                 <br />
                 <label htmlFor="defaultFormRegisterPasswordEx" className="grey-text">
-                  Your password
+                  Password
                 </label>
                 <input
                     type="password"
@@ -69,7 +74,7 @@ class SignupForm extends React.Component {
                     onChange={this.handle_change}
                 />
                 <div className="text-center mt-4">
-                  <MDBBtn color="unique" type="submit">
+                  <MDBBtn color="warning" type="submit">
                     Register
                   </MDBBtn>
                 </div>
@@ -77,6 +82,7 @@ class SignupForm extends React.Component {
             </MDBCol>
           </MDBRow>
         </MDBContainer>
+        </div>
         );
   }
 }
