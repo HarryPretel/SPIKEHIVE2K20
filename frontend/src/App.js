@@ -114,13 +114,17 @@ class App extends Component {
   };
 
   handle_profile = () => { // TODO
-    this.setState({ random: 'random' })
+    this.setState({ displayed_form: 'hives' })
     console.log('handle_profile: ' + JSON.stringify(this.state))
+    this.render();
   };
 
-  handle_hive = () => {
-    localStorage.setItem('username', this.username)
-    console.log('handle_hive username: ', this.username)
+  handle_hive = (pk) => {
+    localStorage.setItem('hive_pk', pk)
+    console.log('handle_hive pk: ', pk)
+    this.setState({
+      displayed_form: 'hives'
+    });
   }
 
   display_form = form => {
@@ -146,6 +150,7 @@ class App extends Component {
         form = <ProfileForm handle_profile={this.handle_profile} />;
         break;
       case 'hives':
+        console.log("form: " + form)
         form = <HiveForm handle_hive={this.handle_hive} />;
         break;
       default:

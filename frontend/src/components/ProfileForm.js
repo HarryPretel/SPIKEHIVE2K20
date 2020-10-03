@@ -10,11 +10,14 @@ import Nav from './Nav';
 
 
 class ProfileForm extends React.Component {
-    state = { userprofile: { user: {} }, 
-        hives: [], 
-        inspections: [], 
+  constructor(props) {
+    super(props);
+    this.state = { userprofile: { user: {} },
+        hives: [],
+        inspections: [],
         equipment: [],
         displayed_form: ''}
+  }
 
     async componentDidMount() {
 
@@ -37,31 +40,30 @@ class ProfileForm extends React.Component {
         });
     };
 
-    
+
 
     renderTableData(){
         function GoToInspection(element){
             localStorage.setItem('hive_pk', element.pk)
             console.log(element.pk)
             let form = <HiveForm handle_hive = {this.handle_hive}/>
-
         }
-        
+
         return this.state.hives.map((hive, index) => {
             const{pk, user, name, addr} = hive
             return(
                 <tr key = {pk}>
                     <td>{name}</td>
-                    <td>{addr}</td> <td><button onClick = {() => GoToInspection(hive)} type="button" class="btn btn-primary">Details</button></td>
+                    <td>{addr}</td> <td><button onClick = {pk => this.props.handle_profile(pk)} type="button" class="btn btn-primary">Details</button></td>
                 </tr>
             )
         })
     }
 
-    
+
 
     render() {
-        
+
         return (
             <div>
                 <h1>Your Profile</h1>
