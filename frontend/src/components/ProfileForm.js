@@ -60,7 +60,8 @@ class ProfileForm extends React.Component {
             return (
                 <tr key={pk}>
                     <td>{name}</td>
-                    <td>{addr}</td> <td><button onClick={() => GoToInspection(hive)} type="button" class="btn btn-primary">Details</button></td>
+                    <td>{addr}</td>
+                    <td><button onClick={() => GoToInspection(hive)} type="button" class="btn btn-primary">Details</button></td>
                 </tr>
             )
         })
