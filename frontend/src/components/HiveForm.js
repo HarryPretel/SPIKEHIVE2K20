@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getAllData } from '../HelperFunctions'
 import { Table } from 'react-bootstrap'
+import { getAllData, getAllData_good } from '../HelperFunctions'
 
 class HiveForm extends React.Component {
     state = {
@@ -13,9 +13,9 @@ class HiveForm extends React.Component {
     async componentDidMount() {
         let pk = localStorage.getItem('hive_pk')
         console.log("hiveForm: " + pk);
-        var alldata = await getAllData(localStorage.getItem('username'))
+        var allgooddata = await getAllData_good(localStorage.getItem('username'))
         //console.log('alldata: ' + JSON.stringify(alldata))
-        this.setState(alldata)
+        this.setState(allgooddata)
         console.log('final form: ' + JSON.stringify(this.state))
         console.log('userprofile' + JSON.stringify(this.state.userprofile) + '\nhive: ' + JSON.stringify(this.state.hives) + '\ninspections: ' + JSON.stringify(this.state.inspections) + '\nequipment: ' + JSON.stringify(this.state.equipment))
         console.log('hives' + JSON.stringify(this.state.hives[0]))
