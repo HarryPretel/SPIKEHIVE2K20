@@ -118,10 +118,10 @@ class App extends Component {
     console.log('handle_profile: ' + JSON.stringify(this.state))
   };
 
-  handle_profile = () => { // TODO
-    this.setState({ random: 'random' })
-    console.log('handle_profile: ' + JSON.stringify(this.state))
-  };
+  handle_hive = () => {
+    localStorage.setItem('username', this.username)
+    console.log('handle_hive username: ', this.username)
+  }
 
   display_form = form => {
     console.log('display form')

@@ -3,10 +3,12 @@ import PropTypes from 'prop-types';
 import { getAllData } from '../HelperFunctions'
 
 class HiveForm extends React.Component {
-    state = { userprofile: { user: {} }, 
-                hives: [],
-                inspections: [], 
-                equipment: [] };
+    state = {
+        userprofile: { user: {} },
+        hives: [],
+        inspections: [],
+        equipment: []
+    };
 
     async componentDidMount() {
 
@@ -30,7 +32,10 @@ class HiveForm extends React.Component {
 
     render() {
         return (
-            <h4>{this.state.userprofile.user.username}'s Hive address: {this.state.hives.addr}</h4>
+            <div>
+                <h4>{this.state.userprofile.user.username}'s Hive address: {this.state.hives.addr}</h4>
+                <h4>fdsadfsadfsasfda</h4>
+            </div>
         );
     }
 }
@@ -38,5 +43,5 @@ class HiveForm extends React.Component {
 export default HiveForm;
 
 HiveForm.propTypes = {
-    handle_profile: PropTypes.func.isRequired
+    handle_hive: PropTypes.func.isRequired
 };

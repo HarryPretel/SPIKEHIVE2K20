@@ -13,7 +13,7 @@ function Nav(props) {
     <ul>
       <li onClick={props.handle_logout}>logout</li>
       <li onClick={() => props.display_form('profile')}>profile</li>
-      <li onClick={() => props.display_form('hive')}>hive</li>
+      <li onClick={() => props.display_form('hives')}>hive</li>
       <li onClick={() => props.display_form('inspection')}>inspection</li>
       <li onClick={() => props.display_form('equipment')}>equipment</li>
     </ul>
