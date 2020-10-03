@@ -1,5 +1,5 @@
 .App {
-  margin-left: 20px;
+
 }
 
 input {
@@ -31,6 +31,16 @@ input {
 
 .App-link {
   color: #61dafb;
+}
+
+try{
+  white-space: nowrap;
+  margin: auto;
+  border-style: double double double double;
+  padding-right: 300px;
+  padding-left: 300px;
+  width: 200px;
+
 }
 
 @keyframes App-logo-spin {
