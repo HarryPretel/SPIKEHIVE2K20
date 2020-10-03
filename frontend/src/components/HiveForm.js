@@ -7,11 +7,11 @@ class HiveForm extends React.Component {
     state = {
         userprofile: { user: {} },
         hives: [],
-        current_hive: []
+        inspections: [],
+        current_hive: {}
     };
 
     async componentDidMount() {
-        let pk = localStorage.getItem('hive_pk')
         console.log("hiveForm: " + pk);
         var allgooddata = await getAllData_good(localStorage.getItem('username'))
         //console.log('alldata: ' + JSON.stringify(alldata))
@@ -20,18 +20,20 @@ class HiveForm extends React.Component {
         console.log('userprofile' + JSON.stringify(this.state.userprofile) + '\nhive: ' + JSON.stringify(this.state.hives) + '\ninspections: ' + JSON.stringify(this.state.inspections) + '\nequipment: ' + JSON.stringify(this.state.equipment))
         console.log('hives' + JSON.stringify(this.state.hives[0]))
        
-        var temp = []
+        var temp1 = []
+        var temp2 = {}
         var hive_pk = localStorage.getItem('hive_pk')
         
         
         for(let i of this.state.hives) {
             if((i.pk) == hive_pk){
-                temp = i
+                temp1 = i.inspections
+                temp2 = i
                 break
             }
         }
-        
-        this.setState({current_hive: temp})
+        console.log(hive_pk)
+        this.setState({inspetions: temp1, current_hive: temp2})
 
     }
 
@@ -57,7 +59,7 @@ class HiveForm extends React.Component {
 
     
 
-        return this.state.current_hive.inspections.map((inspection, index) => {
+        return this.state.inspections.map((inspection, index) => {
             const { pk, hive, date, health,honey,queen_production,weight,net_weight_change } = hive
             return (
                 <tr key={pk}>
@@ -77,8 +79,8 @@ class HiveForm extends React.Component {
         return (
             <div>
                 <h1>Your Hive</h1>
-                <p>Hive name: {this.state.current_hive.name}</p>
-                <p>Hive Address: {this.state.current_hive.addr}</p>
+                <h2>Hive name: {this.state.current_hive.name}</h2>
+                <h2>Hive Address: {this.state.current_hive.addr}</h2>
                 <div>
                     <h1 id = 'title'>Inspections of {this.state.current_hive.name}</h1>
                     <Table striped bordered hover>
