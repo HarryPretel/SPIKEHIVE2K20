@@ -26,12 +26,6 @@ class ProfileForm extends React.Component {
         localStorage.setItem('username', this.userprofile.username)
     }
 
-    display_form = form => {
-        console.log('display form')
-        this.setState({
-          displayed_form: form
-        });
-      };
 
     handle_change = e => {
         const name = e.target.name;
@@ -50,9 +44,7 @@ class ProfileForm extends React.Component {
             localStorage.setItem('hive_pk', element.pk)
             console.log(element.pk)
             let form = <HiveForm handle_hive = {this.handle_hive}/>
-            return(
-                display_form()
-            )
+
         }
         
         return this.state.hives.map((hive, index) => {
