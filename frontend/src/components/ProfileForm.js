@@ -53,6 +53,13 @@ class ProfileForm extends React.Component {
                 <form>
                     <button class="rounded" type="submit" formaction='javascript:editContactInfo();'>Edit Contact Information</button>
                 </form>
+              <div id="editArea" style="visibility: hidden;">
+                <textarea id="editField" rows="8" cols="20"></textarea>
+             <form>
+             <button type="submit" formaction='javascript:submitEdit();'>Submit Edit</button>
+             </form>
+             </div>
+            
                 <h2>Profile Picture</h2>
                 <div>{this.state.userprofile.picture}</div>
                 <div>
@@ -71,6 +78,16 @@ class ProfileForm extends React.Component {
         );
     }
 }
+
+function editContactInfo() {
+	document.getElementById("editArea").style="visibility: visible;";
+}
+
+function submitEdit() {
+	var text = document.getElementById("editField").value;
+	{this.state.userprofile.contact_info} = text;
+}
+
 
 export default ProfileForm;
 
