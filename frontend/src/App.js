@@ -167,8 +167,8 @@ class App extends Component {
         {form}
         <h3>
           {this.state.logged_in
-            ? `username: ${this.state.username}____pk: ${this.state.pk}`
-            : 'Please Log In'}
+            ? ``
+            : 'Welcome to SPIKEHIVE2K20. Please log in or sign up before using.'}
         </h3>
       </div>
     );

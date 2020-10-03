@@ -1,5 +1,10 @@
 .App {
-
+  background-image: url("images/honeycomb_animated.jpg");
+  height: 100%;
+  width: 100%;
+  background-position: center;
+  background-size: cover;
+  margin:  0;
 }
 
 input {
@@ -33,14 +38,29 @@ input {
   color: #61dafb;
 }
 
-try{
-  white-space: nowrap;
-  margin: auto;
-  border-style: double double double double;
-  padding-right: 300px;
-  padding-left: 300px;
-  width: 200px;
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+  width: 100%
+}
 
+r {
+  float:right
+}
+
+
+li {
+  display: inline;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+li:hover {
+  background-color: #111;
 }
 
 @keyframes App-logo-spin {
@@ -51,3 +71,4 @@ try{
     transform: rotate(360deg);
   }
 }
+
