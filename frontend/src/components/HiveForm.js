@@ -17,7 +17,7 @@ class HiveForm extends React.Component {
         this.setState(alldata)
         console.log('final form: ' + JSON.stringify(this.state))
         console.log('userprofile' + JSON.stringify(this.state.userprofile) + '\nhive: ' + JSON.stringify(this.state.hives) + '\ninspections: ' + JSON.stringify(this.state.inspections) + '\nequipment: ' + JSON.stringify(this.state.equipment))
-
+        console.log('hives' + JSON.stringify(this.state.hives[0]))
     }
 
     handle_change = e => {

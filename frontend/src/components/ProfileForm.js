@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import App from '../App'
 import { getAllData } from '../HelperFunctions'
+import { Table } from 'react-bootstrap'
+
 
 class ProfileForm extends React.Component {
     state = { userprofile: { user: {} }, hives: [], inspections: [], equipment: [] }
@@ -13,7 +15,7 @@ class ProfileForm extends React.Component {
         this.setState(alldata)
         console.log('final form: ' + JSON.stringify(this.state))
         console.log('userprofile' + JSON.stringify(this.state.userprofile) + '\nhive: ' + JSON.stringify(this.state.hives) + '\ninspections: ' + JSON.stringify(this.state.inspections) + '\nequipment: ' + JSON.stringify(this.state.equipment))
-
+        
     }
 
 
@@ -27,7 +29,20 @@ class ProfileForm extends React.Component {
         });
     };
 
+    renderTableData(){
+        return this.state.hives.map((hive, index) => {
+            const{pk, user, name, addr} = hive
+            return(
+                <tr key = {pk}>
+                    <td>{name}</td>
+                    <td>{addr}</td>
+                </tr>
+            )
+        })
+    }
+
     render() {
+        
         return (
             <div>
                 <h1>Your Profile</h1>
@@ -40,6 +55,18 @@ class ProfileForm extends React.Component {
                 </form>
                 <h2>Profile Picture</h2>
                 <div>{this.state.userprofile.picture}</div>
+                <div>
+                    <h1 id = 'title'>Your Hives</h1>
+                    <Table striped bordered hover>
+                        <thead>
+                            <th>Hive Name</th>
+                            <th>Hive Address</th>
+                        </thead>
+                        <tbody>
+                            {this.renderTableData()}
+                        </tbody>
+                    </Table>
+                </div>
             </div>
         );
     }
