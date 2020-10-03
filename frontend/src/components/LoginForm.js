@@ -56,14 +56,13 @@ class LoginForm extends React.Component {
        </MDBRow>
      </MDBContainer>
      </div>
- 
+
      );
    }
  }
- 
+
 export default LoginForm;
 
 LoginForm.propTypes = {
   handle_login: PropTypes.func.isRequired
 };
-

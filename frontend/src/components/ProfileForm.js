@@ -61,7 +61,7 @@ class ProfileForm extends React.Component {
             return (
                 <tr key={pk}>
                     <td>{name}</td>
-                    <td>{addr}</td> <td><button onClick = {pk => this.props.handle_profile(pk)} type="button" class="btn btn-primary">Details</button></td>
+                    <td>{addr}</td> <td><button onClick = {e => this.props.handle_profile(e, pk)} type="button" class="btn btn-primary">Details</button></td>
                 </tr>
             )
         })

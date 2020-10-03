@@ -11,9 +11,10 @@ class HiveForm extends React.Component {
     };
 
     async componentDidMount() {
-
+        let pk = localStorage.getItem('hive_pk')
+        console.log("hiveForm: " + pk);
         var alldata = await getAllData(localStorage.getItem('username'))
-        console.log('alldata: ' + JSON.stringify(alldata))
+        //console.log('alldata: ' + JSON.stringify(alldata))
         this.setState(alldata)
         console.log('final form: ' + JSON.stringify(this.state))
         console.log('userprofile' + JSON.stringify(this.state.userprofile) + '\nhive: ' + JSON.stringify(this.state.hives) + '\ninspections: ' + JSON.stringify(this.state.inspections) + '\nequipment: ' + JSON.stringify(this.state.equipment))
