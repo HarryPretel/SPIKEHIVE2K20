@@ -20,11 +20,11 @@ class HiveForm extends React.Component {
         console.log('final form: ' + JSON.stringify(this.state))
         console.log('userprofile' + JSON.stringify(this.state.userprofile) + '\nhive: ' + JSON.stringify(this.state.hives) + '\ninspections: ' + JSON.stringify(this.state.inspections) + '\nequipment: ' + JSON.stringify(this.state.equipment))
         console.log('hives' + JSON.stringify(this.state.hives[0]))
-       
+
         var temp1 = []
         var temp2 = {}
-        
-        
+
+
         for(let i of this.state.hives) {
             if((i.pk) == pk){
                 temp1 = i.inspections
@@ -33,6 +33,8 @@ class HiveForm extends React.Component {
             }
         }
         this.setState({inspetions: temp1, current_hive: temp2})
+        console.log('hivEFORM!!!!!!!:     ' + temp1)
+        this.render()
 
     }
 
@@ -46,7 +48,7 @@ class HiveForm extends React.Component {
         });
     };
 
-    
+
 
     renderTableData() {
         function GoToInspection(element) {
@@ -56,19 +58,19 @@ class HiveForm extends React.Component {
 
         }
 
-    
+
 
         return this.state.inspections.map((inspection, index) => {
             const { pk, hive, date, health,honey,queen_production,weight,net_weight_change } = hive
             return (
                 <tr key={pk}>
                     <td>{date}</td>
-                    <td>{health}</td> 
+                    <td>{health}</td>
                     <td>{honey}</td>
                     <td>{queen_production}</td>
                     <td>{weight}</td>
                     <td>{net_weight_change}</td>
-                    <td><button onClick={() => GoToInspection(hive)} type="button" class="btn btn-primary">Equipments</button></td>
+                    <td><button onClick={e => this.props.handle_hive(e, pk)} type="button" class="btn btn-primary">Equipments</button></td>
                 </tr>
             )
         })
