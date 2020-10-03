@@ -4,6 +4,7 @@ import LoginForm from './components/LoginForm';
 import SignupForm from './components/SignupForm';
 import ProfileForm from './components/ProfileForm';
 import HiveForm from './components/HiveForm';
+import InspectionForm from './components/InspectionForm';
 import './App.css';
 
 class App extends Component {
@@ -120,9 +121,17 @@ class App extends Component {
     this.render();
   };
 
-  handle_hive = (pk) => {
-    localStorage.setItem('hive_pk', pk)
-    console.log('handle_hive pk: ', pk)
+  handle_hive = (e, pk) => {
+    localStorage.setItem('inspection_pk', pk)
+    console.log('inspection_pk: ', pk)
+    this.setState({
+      displayed_form: 'inspections'
+    });
+  }
+
+  handle_inspection = (e, pk) => {
+    localStorage.setItem('inspection_pk', pk)
+    console.log('inspection_pk: ', pk)
     this.setState({
       displayed_form: 'hives'
     });
@@ -151,9 +160,10 @@ class App extends Component {
         form = <ProfileForm handle_profile={this.handle_profile} />;
         break;
       case 'hives':
-        console.log("form: " + form)
         form = <HiveForm handle_hive={this.handle_hive} />;
         break;
+      case 'inspections':
+        form = <InspectionForm handle_hive={this.handle_inspection} />;
       default:
         form = null;
     }

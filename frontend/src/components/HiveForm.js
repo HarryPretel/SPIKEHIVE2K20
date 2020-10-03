@@ -32,10 +32,9 @@ class HiveForm extends React.Component {
                 break
             }
         }
-        this.setState({inspetions: temp1, current_hive: temp2})
-        console.log('hivEFORM!!!!!!!:     ' + temp1)
-        this.render()
-
+        this.setState({inspections: temp1, current_hive: temp2})
+        console.log(temp1)
+        //this.render()
     }
 
     handle_change = e => {
@@ -61,7 +60,7 @@ class HiveForm extends React.Component {
 
 
         return this.state.inspections.map((inspection, index) => {
-            const { pk, hive, date, health,honey,queen_production,weight,net_weight_change } = hive
+            const { pk, hive, date, health,honey,queen_production,weight,net_weight_change, equipment } = inspection
             return (
                 <tr key={pk}>
                     <td>{date}</td>
