@@ -12,6 +12,7 @@ class HiveForm extends React.Component {
     };
 
     async componentDidMount() {
+        let pk = localStorage.getItem('hive_pk')
         console.log("hiveForm: " + pk);
         var allgooddata = await getAllData_good(localStorage.getItem('username'))
         //console.log('alldata: ' + JSON.stringify(alldata))
@@ -22,17 +23,15 @@ class HiveForm extends React.Component {
        
         var temp1 = []
         var temp2 = {}
-        var hive_pk = localStorage.getItem('hive_pk')
         
         
         for(let i of this.state.hives) {
-            if((i.pk) == hive_pk){
+            if((i.pk) == pk){
                 temp1 = i.inspections
                 temp2 = i
                 break
             }
         }
-        console.log(hive_pk)
         this.setState({inspetions: temp1, current_hive: temp2})
 
     }
@@ -82,7 +81,7 @@ class HiveForm extends React.Component {
                 <h2>Hive name: {this.state.current_hive.name}</h2>
                 <h2>Hive Address: {this.state.current_hive.addr}</h2>
                 <div>
-                    <h1 id = 'title'>Inspections of {this.state.current_hive.name}</h1>
+                    <h1 id = 'title'>Past Inspections</h1>
                     <Table striped bordered hover>
                         <thead>
                             <th>Inspection Date</th>
