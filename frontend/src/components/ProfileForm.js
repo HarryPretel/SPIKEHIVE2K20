@@ -68,6 +68,12 @@ class ProfileForm extends React.Component {
                     </Table>
                 </div>
             </div>
+
+            function editContactInfo() {
+               <input type="text" id="editContactInfo">
+               var text = document.getElementById("editContactInfo").value;
+               {this.state.userprofile.contact_info} = text;
+            }
         );
     }
 }
